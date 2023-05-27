@@ -3,6 +3,8 @@
 	import AddTodoForm from '../components/AddTodoForm.svelte';
 	import Tabs from '../shared/tabs.svelte';
 	import AllTodos from '../components/AllTodos.svelte';
+	import ActiveTodos from '../components/ActiveTodos.svelte';
+	import CompletedTodos from '../components/CompletedTodos.svelte';
 
 	let todos: TodoTypeSet[] = [
 		{
@@ -65,9 +67,9 @@
 			{#if activeTab === 'All'}
 				<AllTodos {todos} {toggleComplete} />
 			{:else if activeTab === 'Active'}
-				<p>Active todos</p>
+				<ActiveTodos />
 			{:else if activeTab === 'Completed'}
-				<p>Completed todos</p>
+				<CompletedTodos />
 			{/if}
 		</div>
 	</div>
