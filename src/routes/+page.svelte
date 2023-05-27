@@ -50,7 +50,7 @@
 			<div class="w-full flex justify-between text-sm text-gray-500 p-2">
 				<button class="todoFilter space-x-2">
 					<span class="">All</span>
-					<span class="px-1.5 border border-white bg-green-400 text-white rounded-full"
+					<span class="circleBadge"
 						>{todos.length}</span
 					>
 				</button>
