@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.todoFilter {
+    @apply flex justify-between items-center px-2 py-[2px] border border-gray-300/[0.7] rounded-full bg-slate-50 hover:bg-white hover:text-green-600;
+}
+.todoList {
+    @apply w-full flex justify-between items-center text-gray-600 bg-white/[0.7] border p-5 my-3;
+}
+
+.completedTask {
+    @apply line-through text-gray-500 bg-neutral-200;
+}
