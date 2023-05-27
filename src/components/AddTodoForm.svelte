@@ -9,11 +9,30 @@
 	const generateRandomId = (): string => Math.random().toString(16).slice(2);
 
 	const handleSubmit = (): void => {
+		// task validation
+		if (task.trim().length === 0) {
+			alert('Todo task cannot be empty.');
+			return;
+		}
+
+		if (task.trim().length < 5) {
+			alert('Todo task cannot be less than 5 characters long.');
+			task = '';
+			return;
+		}
+
+		if (task.trim().length > 20) {
+			alert('Todo task cannot be more than 20 characters long.');
+			task = '';
+			return;
+		}
+
 		let todo: TodoTypeSet = {
 			id: generateRandomId(),
 			task,
 			isCompleted
 		};
+
 		dispatcher('addNewTodo', todo);
 		task = '';
 	};
