@@ -5,7 +5,7 @@
 	export let toggleComplete: any;
 </script>
 
-<div class="">
+<div>
 	<ul class="h-[52vh] overflow-y-scroll">
 		{#each todos as todo (todo.id)}
 			<li class="todoList" class:completedTask={todo.isCompleted}>
@@ -23,7 +23,6 @@
 						for={`todo-${todo.id}`}
 					/>
 				</div>
-				<!-- <button aria-label="Remove todo" class="remove" /> -->
 			</li>
 		{/each}
 	</ul>
