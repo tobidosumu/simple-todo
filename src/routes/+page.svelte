@@ -3,6 +3,7 @@
 	import AddTodoForm from '../components/AddTodoForm.svelte';
 	import Tabs from '../shared/tabs.svelte';
 	import Todos from '../components/Todos.svelte';
+	import { identity } from 'svelte/internal';
 
 	let todos: TodoTypeSet[] = [
 		{
@@ -69,6 +70,11 @@
 	const tabChange = (e: any) => {
 		activeTab = e.detail;
 	};
+
+	// delete todo
+	let handleDeleteTodo = (id: string): void => {
+		todos = todos.filter((todo) => todo.id !== id)
+	}
 </script>
 
 <div class="w-full flex flex-col items-center mt-10">
@@ -77,11 +83,11 @@
 		<div class="my-3 sticky top-0 z-50">
 			<Tabs on:tabChange={tabChange} {activeTab} {tabs} {countAllTodos} {activeTodos} {completedTodos} />
 			{#if activeTab === 'All'}
-				<Todos {todos} {eachTodo} />
+				<Todos {todos} {eachTodo} handleDeleteTodo={handleDeleteTodo} />
 			{:else if activeTab === 'Active'}
-				<Todos todos={filteredTodos} {eachTodo} />
+				<Todos todos={filteredTodos} {eachTodo} handleDeleteTodo={handleDeleteTodo} />
 			{:else if activeTab === 'Completed'}
-				<Todos todos={filteredTodos} {eachTodo} />
+				<Todos todos={filteredTodos} {eachTodo} handleDeleteTodo={handleDeleteTodo} />
 			{/if}
 		</div>
 	</div>

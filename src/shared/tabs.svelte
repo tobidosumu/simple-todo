@@ -7,6 +7,9 @@
 	export let countAllTodos: number;
 	export let activeTodos: number;
 	export let completedTodos: number;
+
+	let activeCircleBadge: boolean = false;
+
 </script>
 
 <div class="">
@@ -16,11 +19,11 @@
 				<button class:activeTab={tab === activeTab} class="todoFilter">
 					<span>{tab}</span>
 					{#if tab === 'All'}
-						<span class="circleBadge">{countAllTodos}</span>
+						<span class:activeCircleBadge={tab === activeTab} class="circleBadge">{countAllTodos}</span>
 					{:else if tab === 'Active'}
-						<span class="circleBadge">{activeTodos}</span>
+						<span class:activeCircleBadge={tab === activeTab} class="circleBadge">{activeTodos}</span>
 					{:else if tab === 'Completed'}
-						<span class="circleBadge">{completedTodos}</span>
+						<span class:activeCircleBadge={tab === activeTab} class="circleBadge">{completedTodos}</span>
 					{/if}
 				</button>
 			</li>
