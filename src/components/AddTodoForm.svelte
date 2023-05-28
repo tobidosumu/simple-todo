@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { TodoTypeSet } from '../components/todo';
+	import type { TodoTypeSet } from '../todo';
 	import { createEventDispatcher } from 'svelte';
 
 	let dispatcher = createEventDispatcher();

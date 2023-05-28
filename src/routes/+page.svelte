@@ -1,10 +1,8 @@
 <script lang="ts">
-	import type { TodoTypeSet } from '../components/todo';
+	import type { FilterTodoTypes, TodoTypeSet } from '../todo';
 	import AddTodoForm from '../components/AddTodoForm.svelte';
 	import Tabs from '../shared/tabs.svelte';
-	import AllTodos from '../components/AllTodos.svelte';
-	import ActiveTodos from '../components/ActiveTodos.svelte';
-	import CompletedTodos from '../components/CompletedTodos.svelte';
+	import Todos from '../components/Todos.svelte';
 
 	let todos: TodoTypeSet[] = [
 		{
@@ -29,12 +27,13 @@
 		}
 	];
 
+	// add new todo
 	const addNewTodo = (e: any) => {
 		const newTodo = e.detail;
 		todos = [newTodo, ...todos];
 	};
 
-	const toggleComplete = (todo: TodoTypeSet): void => {
+	const eachTodo = (todo: TodoTypeSet): void => {
 		todos = todos.map((item) => {
 			if (item.id === todo.id) {
 				return {
@@ -52,7 +51,20 @@
 
 	// count total number of todos
 	let countAllTodos: number;
+	let activeTodos: number;
+
+	// reactive values
 	$: countAllTodos = todos.length;
+	$: activeTodos = todos.filter((todo) => !todo.isCompleted).length;
+	$: completedTodos = todos.filter((todo) => todo.isCompleted).length;
+
+	// Filter out completed todos
+	$: filteredTodos =
+		activeTab === 'Completed'
+			? todos.filter((todo) => todo.isCompleted)
+			: activeTab === 'Active'
+			? todos.filter((todo) => !todo.isCompleted)
+			: todos;
 
 	const tabChange = (e: any) => {
 		activeTab = e.detail;
@@ -63,13 +75,13 @@
 	<AddTodoForm on:addNewTodo={addNewTodo} />
 	<div class="w-[95%] md:w-[70%] lg:w-[50%] mt-1">
 		<div class="my-3 sticky top-0 z-50">
-			<Tabs on:tabChange={tabChange} {activeTab} {tabs} {countAllTodos} />
+			<Tabs on:tabChange={tabChange} {activeTab} {tabs} {countAllTodos} {activeTodos} {completedTodos} />
 			{#if activeTab === 'All'}
-				<AllTodos {todos} {toggleComplete} />
+				<Todos {todos} {eachTodo} />
 			{:else if activeTab === 'Active'}
-				<ActiveTodos />
+				<Todos todos={filteredTodos} {eachTodo} />
 			{:else if activeTab === 'Completed'}
-				<CompletedTodos />
+				<Todos todos={filteredTodos} {eachTodo} />
 			{/if}
 		</div>
 	</div>

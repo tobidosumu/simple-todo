@@ -1,10 +1,12 @@
 <script lang="ts">
-    import { createEventDispatcher } from "svelte";
-    let dispatcher = createEventDispatcher();
-     
+	import { createEventDispatcher } from 'svelte';
+	let dispatcher = createEventDispatcher();
+
 	export let tabs: string[];
 	export let activeTab: string;
 	export let countAllTodos: number;
+	export let activeTodos: number;
+	export let completedTodos: number;
 </script>
 
 <div class="">
@@ -15,6 +17,10 @@
 					<span>{tab}</span>
 					{#if tab === 'All'}
 						<span class="circleBadge">{countAllTodos}</span>
+					{:else if tab === 'Active'}
+						<span class="circleBadge">{activeTodos}</span>
+					{:else if tab === 'Completed'}
+						<span class="circleBadge">{completedTodos}</span>
 					{/if}
 				</button>
 			</li>

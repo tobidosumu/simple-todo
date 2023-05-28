@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { TodoTypeSet } from "./todo";
+	import type { TodoTypeSet } from "../todo";
 
-	export let todos: TodoTypeSet[];
-	export let toggleComplete: any;
+    export let todos: TodoTypeSet[];
+	export let eachTodo: any;
 </script>
 
 <div>
@@ -12,7 +12,7 @@
 				<p class="text-sm font-semibold">{todo.task}</p>
 				<div>
 					<input
-						on:change={() => toggleComplete(todo)}
+						on:change={() => eachTodo(todo)}
 						checked={todo.isCompleted}
 						class="bg-gray-100 border-gray-300 text-green-400 hover:cursor-pointer focus:ring-green-200 w-8 h-8 rounded-full"
 						type="checkbox"
